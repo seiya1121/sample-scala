@@ -14,18 +14,16 @@ trait TraitC {
   def printWithX(): Unit = println("C" + x)
 }
 
-case class Point(x: Int, y: Int, private val z: Int) extends TraitA with TraitB with TraitC {
-  override def printWithX(): Unit = {
-    super[TraitA].printWithX()
-  }
-}
+case class Point(x: Int, y: Int, private val z: Int) extends TraitA with TraitB with TraitC
 
 object Point {
-  val point: Point = Point(1, 2, 3)
-  val total: Int = point.x + point.y + point.z
+  def apply(x: Int, y: Int): Point = {
+    new Point(x, y, 1)
+  }
 
   def printWithZ(): Int = {
-    point.printWithX()
+    val p: Point = Point(5, 3)
+    val total = p.x + p.y + p.z
     println(total)
     total
   }
